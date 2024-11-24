@@ -1,17 +1,17 @@
 public class Espacio{
-    private int codigo;
+    private int codigoUnico;
     private String tipo;
     private String nombre;
     private int capacidad;
     private String estado;
-    private String rol;
+    private String rolPermitido;
 
-    public int getCodigo() {
-        return codigo;
+    public int getCodigoUnico() {
+        return codigoUnico;
     }
 
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
+    public void setCodigoUnico(int codigoUnico) {
+        this.codigoUnico = codigoUnico;
     }
 
     public String getTipo() {
@@ -45,12 +45,12 @@ public class Espacio{
         this.estado = estado;
     }
 
-    public String getRol() {
-        return rol;
+    public String getRolPermitido() {
+        return rolPermitido;
     }
 
-    public void setRol(String rol) {
-        this.rol = rol;
+    public void seetRolPermitido(String rolPermitido) {
+        this.rolPermitido = rolPermitido;
     }
 
 }

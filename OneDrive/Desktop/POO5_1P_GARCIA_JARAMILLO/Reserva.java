@@ -1,23 +1,38 @@
 import java.util.Date;
 
 public class Reserva {
-    private int cantReservas;
+    private static int cantReservas = 0;
+    private String codigoReserva;
     private String codigoUsuario;
-    private String cedula;
+    private String cedulaUsuario;
     private Date fecha;
-    private int codigoEspacio;
+    private String codigoEspacio;
     private String tipoEspacio;
     private String estado;
     private String motivo;
+
+    public Reserva(String codigoUsuario, String cedulaUsuario, Date fecha, String codigoEspacio, String tipoEspacio, String estado, String motivo){
+        this.codigoReserva = String.format("%05d", ++cantReservas);
+        this.codigoUsuario = codigoUsuario;
+        this.cedulaUsuario = cedulaUsuario;
+        this.fecha = fecha;
+        this.codigoEspacio = codigoEspacio;
+        this.tipoEspacio = tipoEspacio;
+        this.estado = estado;
+        this.motivo = motivo;
+    }
 
     public int getCantReservas() {
         return cantReservas;
     }
 
-    public void setCantReservas(int cantReservas) {
-        this.cantReservas = cantReservas;
+    public String getCodigoReserva(){
+        return codigoReserva;
     }
 
+    public void setCodigoReserva(String codigoReserva){
+        this.codigoReserva = codigoReserva;
+    }
     public String getCodigoUsuario() {
         return codigoUsuario;
     }
@@ -26,12 +41,12 @@ public class Reserva {
         this.codigoUsuario = codigoUsuario;
     }
 
-    public String getCedula() {
-        return cedula;
+    public String getCedulaUsuario() {
+        return cedulaUsuario;
     }
 
-    public void setCedula(String cedula) {
-        this.cedula = cedula;
+    public void setCedulaUsuario(String cedulaUsuario) {
+        this.cedulaUsuario = cedulaUsuario;
     }
     public Date getFecha() {
         return fecha;
@@ -41,11 +56,11 @@ public class Reserva {
         this.fecha = fecha;
     }
 
-    public int getCodigoEspacio() {
+    public String getCodigoEspacio() {
         return codigoEspacio;
     }
 
-    public void setCodigoEspacio(int codigoEspacio) {
+    public void setCodigoEspacio(String codigoEspacio) {
         this.codigoEspacio = codigoEspacio;
     }
 

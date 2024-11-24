@@ -1,18 +1,37 @@
 public abstract class Usuario {
-    private int codigo;
+    private String codigoUnico;
     private String cedula;
     private String nombre;
     private String apellido;
     private String usuario;
     private String password;
     private String correo;
+    private String rol;
 
-    public int getCodigo() {
-        return codigo;
+    public Usuario(String codigoUnico, String cedula, String nombre, String apellido, String usuario, String password, String correo, String rol){//, String correo, String rol){
+        this.codigoUnico = codigoUnico;
+        this.cedula = cedula;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.usuario = usuario;
+        this.password = password;
+        this.correo = correo;
+        this.rol = rol;
+
     }
 
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
+    public abstract void mostrarMenu();
+    
+    public abstract void reservar();
+
+    public abstract void consultarReserva();
+
+    public String getCodigoUnico() {
+        return codigoUnico;
+    }
+
+    public void setCodigoUnico(String codigoUnico) {
+        this.codigoUnico = codigoUnico;
     }
 
     public String getCedula() {
@@ -60,4 +79,12 @@ public abstract class Usuario {
     public void setCorreo(String correo) {
         this.correo = correo;
     }
-}
+
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
+    }
+} 
