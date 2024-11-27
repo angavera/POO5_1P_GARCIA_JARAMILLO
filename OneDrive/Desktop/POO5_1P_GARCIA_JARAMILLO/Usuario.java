@@ -87,7 +87,4 @@ public abstract class Usuario {
     public void setRol(String rol) {
         this.rol = rol;
     }
-public void mostrar(){
-    System.out.println("prueba 1");
-}
 } 
