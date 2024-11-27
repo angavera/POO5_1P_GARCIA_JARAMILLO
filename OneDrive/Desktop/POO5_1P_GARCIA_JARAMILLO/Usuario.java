@@ -1,3 +1,4 @@
+
 public abstract class Usuario {
     private String codigoUnico;
     private String cedula;

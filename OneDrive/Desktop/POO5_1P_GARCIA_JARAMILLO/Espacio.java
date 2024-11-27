@@ -1,3 +1,4 @@
+
 public class Espacio{
     private int codigoUnico;
     private String tipo;
