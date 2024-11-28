@@ -88,4 +88,6 @@ public abstract class Usuario {
     public void setRol(String rol) {
         this.rol = rol;
     }
+
+    public abstract void enviarCorreo(Reserva reserva);
 } 
