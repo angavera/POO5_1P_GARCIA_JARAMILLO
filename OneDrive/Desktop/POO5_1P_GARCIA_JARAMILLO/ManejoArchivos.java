@@ -96,7 +96,6 @@ public class ManejoArchivos {
             String correo = datos[6].trim();
             String rol = datos[7].trim();
     
-            // Procesar según el rol del usuario
             switch (rol) {
                 case "E" -> {
                     // Validar campos adicionales para estudiantes
@@ -170,18 +169,7 @@ public class ManejoArchivos {
     }
     return reservas;
 }
-    /*public static ArrayList<Estudiante> procesarEstudiantes(ArrayList<String> lineas) {
-        ArrayList<Estudiante> estudiantes = new ArrayList<>();
-        for (String linea : lineas) {
-            String[] datos = linea.split("\\|");
-            String codigo = datos[0].trim();
-            String tipo = datos[1].trim();
-            String nombre = datos[2].trim();
-            int capacidad = Integer.parseInt(datos[3].trim());
-            String estado = datos[4].trim();
-            String rolPermitido = datos[5].trim();
-            espacios.add(new Espacio(codigo, tipo, nombre, capacidad, estado, rolPermitido));
-        }
-        return estudiantes;
-    }*/
+
+    
+    
 }

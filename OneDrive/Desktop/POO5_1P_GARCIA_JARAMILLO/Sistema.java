@@ -6,12 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Date;
-<<<<<<< HEAD
 
 public class Sistema{
-=======
-public class Sistema {
->>>>>>> 46d3ee324f3477c376bae4675dbd643eb126beaa
     public static ArrayList<Usuario> usuarios;
     public static ArrayList<Espacio> espacios;
     public static ArrayList<Reserva> reservas;
@@ -71,11 +67,7 @@ public class Sistema {
         Sistema sistema = new Sistema();
         sistema.iniciarSesion();
     }
-<<<<<<< HEAD
 
 }
 
 
-=======
-}
->>>>>>> 46d3ee324f3477c376bae4675dbd643eb126beaa
