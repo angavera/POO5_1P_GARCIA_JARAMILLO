@@ -1,3 +1,7 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public abstract class Usuario {
     private String codigoUnico;
     private String cedula;
@@ -20,11 +24,24 @@ public abstract class Usuario {
 
     }
 
+    public static Date convertirFecha(String fechaUsr){
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
+        formatter.setLenient(false);
+        try{
+            return formatter.parse(fechaUsr);
+        } catch (ParseException e){
+            System.out.println("Fecha invalida: "+ fechaUsr);
+            return null;
+        }
+    }
+
     public abstract void mostrarMenu();
     
     public abstract void reservar();
 
     public abstract void consultarReserva();
+
+    //public abstract void enviarCorreo(Reserva reserva);
 
     public String getCodigoUnico() {
         return codigoUnico;

@@ -22,7 +22,7 @@ public class Reserva {
         this.motivo = motivo;
     }
 
-    public int getCantReservas() {
+    public static int getCantReservas() {
         return cantReservas;
     }
 

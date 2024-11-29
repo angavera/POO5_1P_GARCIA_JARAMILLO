@@ -1,16 +1,25 @@
 public class Espacio{
-    private int codigoUnico;
+    private String codigoUnico;
     private String tipo;
     private String nombre;
     private int capacidad;
     private String estado;
     private String rolPermitido;
 
-    public int getCodigoUnico() {
+    public Espacio(String codigoUnico, String tipo, String nombre, int capacidad, String estado, String rolPermitido){
+        this.codigoUnico = codigoUnico;
+        this.tipo = tipo;
+        this.nombre = nombre;
+        this.capacidad = capacidad;
+        this.estado = estado;
+        this.rolPermitido = rolPermitido;
+    }
+
+    public String getCodigoUnico() {
         return codigoUnico;
     }
 
-    public void setCodigoUnico(int codigoUnico) {
+    public void setCodigoUnico(String codigoUnico) {
         this.codigoUnico = codigoUnico;
     }
 
