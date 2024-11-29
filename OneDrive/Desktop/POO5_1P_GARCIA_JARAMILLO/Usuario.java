@@ -1,6 +1,9 @@
+<<<<<<< HEAD
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+=======
+>>>>>>> 46d3ee324f3477c376bae4675dbd643eb126beaa
 
 public abstract class Usuario {
     private String codigoUnico;
@@ -104,4 +107,6 @@ public abstract class Usuario {
     public void setRol(String rol) {
         this.rol = rol;
     }
+
+    public abstract void enviarCorreo(Reserva reserva);
 } 

@@ -1,7 +1,12 @@
+<<<<<<< HEAD
 import java.util.ArrayList;
 import  java.util.Scanner;
 
 public class Administrador extends Usuario{
+=======
+
+public class Administrador {
+>>>>>>> 46d3ee324f3477c376bae4675dbd643eb126beaa
     private String cargo;
 
     public Administrador(String codigo, String cedula, String nombre, String apellido, String usuario, String password, String correo, String rol,  String cargo){
