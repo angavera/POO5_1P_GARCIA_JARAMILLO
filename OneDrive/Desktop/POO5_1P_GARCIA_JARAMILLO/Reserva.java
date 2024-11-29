@@ -1,6 +1,12 @@
-import java.util.Date;
 
-public class Reserva {
+import java.net.Authenticator;
+import java.net.PasswordAuthentication;
+import java.util.Date;
+import javax.mail.*;
+import io.githhub.cdimascio.Dotenv.*;
+import java.util.Properties;
+
+public class Reserva{
     private static int cantReservas = 0;
     private String codigoReserva;
     private String codigoUsuario;
@@ -11,7 +17,7 @@ public class Reserva {
     private String estado;
     private String motivo;
 
-    public Reserva(String codigoUsuario, String cedulaUsuario, Date fecha, String codigoEspacio, String tipoEspacio, String estado, String motivo){
+    public Reserva(String codigoUnico,String codigoUsuario, String cedulaUsuario, Date fecha, String codigoEspacio, String tipoEspacio, String estado, String motivo){
         this.codigoReserva = String.format("%05d", ++cantReservas);
         this.codigoUsuario = codigoUsuario;
         this.cedulaUsuario = cedulaUsuario;
@@ -88,5 +94,5 @@ public class Reserva {
         this.motivo = motivo;
     }
 
-
+ 
 }

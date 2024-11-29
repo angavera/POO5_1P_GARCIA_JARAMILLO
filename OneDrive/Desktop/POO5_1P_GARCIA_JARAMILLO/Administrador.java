@@ -1,3 +1,4 @@
+
 public class Administrador {
     private String cargo;
 
