@@ -1,14 +1,20 @@
-import java.util.Date;
-import java.util.List;
+package src;
 import java.util.Scanner;
-public class Profesor extends Usuario{
-    private String facultad;
-    private String[] materias;
+import java.net.Authenticator;
+import java.net.PasswordAuthentication;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Properties;
+//import io.github.cdimascio.dotenv.Dotenv;
+public class Estudiante extends Usuario{
+    private String matricula;
+    private String carrera;
 
-    public Profesor(String codigo, String cedula, String nombre, String apellido, String usuario, String password, String correo, String rol,  String facultad, String[] materias ){
+    public Estudiante(String codigo, String cedula, String nombre, String apellido, String usuario, String password, String correo, String rol, String matricula, String carrera){
         super(codigo, cedula, nombre, apellido, usuario, password, correo, rol);
-        this.facultad = facultad;
-        this.materias = materias;
+        this.matricula = matricula;
+        this.carrera = carrera;
     }
 
     @Override
@@ -16,7 +22,7 @@ public class Profesor extends Usuario{
         Scanner sc =new Scanner(System.in);
         int opcion;
         do{
-            System.out.println("\n===== Menu Profesor =====");
+            System.out.println("\n===== Menu Estudiante =====");
             System.out.println("1. Reservar Espacio");
             System.out.println("2. Consultar Reserva");
             System.out.println("3. Cerrar Sesion");
@@ -43,45 +49,14 @@ public class Profesor extends Usuario{
             System.out.println("Fecha valida: "+ fechaReserva);
         }
 
-        System.out.println("Tipos de espacios disponibles para reservar:");
-        System.out.println("1. Laboratorios");
-        System.out.println("2. Aulas");
-        System.out.println("3. Auditorios");
-        System.out.print("Seleccione una opción: ");
-        int opcionEspacio = sc.nextInt();
-        sc.nextLine();
-
-        String tipoEspacio;
-        switch (opcionEspacio) {
-            case 1 : 
-                tipoEspacio = "LABORATORIO";
-                break;
-            case 2 : 
-                tipoEspacio = "AULA";
-                break;
-            case 3 : 
-                tipoEspacio = "AUDITORIO";
-                break;
-            default :
-                System.out.println("Opción no válida. Intente de nuevo.");
-                return;
+        System.out.println("Espacios disponibles para estudiantes: ");
+        for(Espacio espacio : Sistema.espacios){
+            if(espacio.getRolPermitido().equalsIgnoreCase("ESTUDIANTE") || espacio.getRolPermitido().equalsIgnoreCase("AMBOS")){
+                if(espacio.getEstado().equalsIgnoreCase("DISPONIBLE")){
+                    System.out.println(espacio.getCodigoUnico() + " - " + espacio.getNombre() + "(Tipo: " + espacio.getTipo() + ", Capacidad: " + espacio.getCapacidad() + ")");
+                }
             }
-        
-
-        System.out.println("Espacios disponibles de tipo " + tipoEspacio + ":");
-        boolean espaciosDisponibles = false;
-        for (Espacio espacio : Sistema.espacios) {
-        if (espacio.getTipo().equalsIgnoreCase(tipoEspacio) && espacio.getEstado().equalsIgnoreCase("DISPONIBLE") && espacio.getRolPermitido().equalsIgnoreCase("PROFESOR")) {
-            System.out.println(espacio.getCodigoUnico() + " - " + espacio.getNombre() +
-                               " (Capacidad: " + espacio.getCapacidad() + ")");
-            espaciosDisponibles = true;
-        }
-        }
-
-        if (!espaciosDisponibles) {
-            System.out.println("No hay espacios disponibles de este tipo.");
-            return;
-        }
+            }
 
             System.out.println("Ingrese el codigo el espacio a reservar: ");
             String codigoEspacio = sc.nextLine();
@@ -98,20 +73,8 @@ public class Profesor extends Usuario{
                 return;
             }
 
-            System.out.println("Materias asignadas: ");
-            for(int i = 0; i < materias.length; i++){
-                System.out.println((i + 1) + ". " + materias[i]);
-            }
-
-            System.out.print("Seleccione una materia: ");
-            int opcionMateria = sc.nextInt();
-            sc.nextLine(); 
-
-            if (opcionMateria < 1 || opcionMateria > materias.length) {
-                System.out.println("Opción no válida. Intente de nuevo.");
-                return;
-            }
-            String materiaSeleccionada = materias[opcionMateria - 1];
+            System.out.println("Ingreseel motivo de la reserva: ");
+            String motivo = sc.nextLine();
 
             System.out.println("Desea confirmar esta reserva? (S/N): ");
             String conf = sc.nextLine();
@@ -120,12 +83,13 @@ public class Profesor extends Usuario{
                 return;
             }
             
-            Reserva newReserva =  new Reserva(this.getCodigoUnico(), this.getCedula(), fechaReserva, espacioSeleccionado.getCodigoUnico(), espacioSeleccionado.getTipo(), "PENDIENTE", materiaSeleccionada);
+            Reserva newReserva =  new Reserva(this.getCodigoUnico(),this.getCedula(), fechaReserva, espacioSeleccionado.getCodigoUnico(), espacioSeleccionado.getTipo(), "PENDIENTE", motivo);
             Sistema.reservas.add(newReserva);
             espacioSeleccionado.setEstado("RESERVADO");
 
-            System.out.println("Reserva creada.");
+            System.out.println("Reserva creada. Un administrador revisara su solicitud");
         }
+        
 
     @Override
     public void consultarReserva(){
@@ -149,25 +113,26 @@ public class Profesor extends Usuario{
             }
         }
 
-        if (!reservaEncontrada) {
+        if(!reservaEncontrada){
             System.out.println("No se encontraron reservas para esa fecha.");
         }
-        }
+    }
+    
 
-    public String getFacultad() {
-        return facultad;
+    public String getMatricula() {
+        return matricula;
     }
 
-    public void setFacultad(String facultad) {
-        this.facultad = facultad;
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
     }
 
-    public String[] getMaterias() {
-        return materias;
+    public String getCarrera() {
+        return carrera;
     }
 
-    public void setMaterias(String[] materias) {
-        this.materias = materias;
+    public void setCarrera(String carrera) {
+        this.carrera = carrera;
     }
 
 }

@@ -1,3 +1,4 @@
+package src;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -10,6 +11,12 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class ManejoArchivos {
+    /**
+     *  El metodo recibe un String que se traduce como la ruta del archivo donde se va a extraer al informacion
+     *  y devuelve un ArrayList de Strings con todas las lineas leidas por el metodo
+     * @param nombrearchivo Ruta en formato String
+     * @return ArrayList de Strings con las lineas leidas del archivo
+     */
     public static ArrayList<String> LeeFichero(String nombrearchivo) {
         ArrayList<String> lineas = new ArrayList<>();
         File archivo = null;
@@ -27,6 +34,7 @@ public class ManejoArchivos {
             String linea;
             while ((linea = br.readLine()) != null) {
                 lineas.add(linea);
+                
 
             }
 
@@ -47,7 +55,12 @@ public class ManejoArchivos {
         return lineas;
 
     }
-
+/**
+ * El metodo recibe la ruta del archivo en formato String y la linea que quiere escribirse dentro del archivo
+ * 
+ * @param nombreArchivo Ingresa la ruta del archivo en formato String
+ * @param linea Ingresa la linea que se quiere escribir
+ */
     public static void EscribirArchivo(String nombreArchivo, String linea) {
 
         FileWriter fichero = null;
@@ -57,7 +70,6 @@ public class ManejoArchivos {
             fichero = new FileWriter(nombreArchivo,true);
             bw = new BufferedWriter(fichero);
             bw.write(linea+"\n");
-            System.out.println("ksdsdlsd");
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -74,12 +86,16 @@ public class ManejoArchivos {
             }
         }
     }
-
+/**
+ * El metodo procesa los usuarios que se encuentran en cada linea de los Archivos
+ * @param lineas Ingresa el ArrayList con las lineas del archivo usuarios.txt
+ * @return Devuelve el ArrayList de Usuarios que se crean a partir del metodo
+ */
     public static ArrayList<Usuario> procesarUsuarios(ArrayList<String> lineas) {
         ArrayList<Usuario> usuarios = new ArrayList<>();
     
         for (String linea : lineas) {
-            String[] datos = linea.split("\\|");
+            String[] datos = linea.split(" \\|");
     
             
             if (datos.length < 8) {
@@ -95,44 +111,31 @@ public class ManejoArchivos {
             String contraseña = datos[5].trim();
             String correo = datos[6].trim();
             String rol = datos[7].trim();
+            System.out.println("Rol detectado: [" + rol + "]"); 
     
             switch (rol) {
                 case "E" -> {
-                    // Validar campos adicionales para estudiantes
-                    if (datos.length < 8 ) {
-                        System.err.println("Datos incompletos para estudiante en línea: " + linea);
-                        continue; // Saltar a la siguiente línea
-                    }
-                    String matricula = datos[8].trim();
-                    String carrera = datos[9].trim();
-                    usuarios.add(new Estudiante(codigo, cedula, nombres, apellidos, usuario, contraseña, correo, rol, matricula, carrera));
+                    Estudiante estudiante = new Estudiante(codigo, cedula, nombres, apellidos, usuario, contraseña, correo, rol, null, null);
+                    usuarios.add(estudiante);
                 }
                 case "P" -> {
-                    // Validar campos adicionales para profesores
-                    if (datos.length < 10) {
-                        System.err.println("Datos incompletos para profesor en línea: " + linea);
-                        continue; // Saltar a la siguiente línea
-                    }
-                    String facultad = datos[8].trim();
-                    String[] materias = datos[9].trim().split(",");
-                    usuarios.add(new Profesor(codigo, cedula, nombres, apellidos, usuario, contraseña, correo, rol, facultad, materias));
+                    Profesor profesor = new Profesor(codigo, cedula, nombres, apellidos, usuario, contraseña, correo , rol, null, null);
+                    usuarios.add(profesor);
                 }
                 case "A" -> {
-                    // Validar campos adicionales para administradores
-                    if (datos.length < 9) {
-                        System.err.println("Datos incompletos para administrador en línea: " + linea);
-                        continue; // Saltar a la siguiente línea
-                    }
-                    String cargo = datos[8].trim();
-                    usuarios.add(new Administrador(codigo, cedula, nombres, apellidos, usuario, contraseña, correo, rol, cargo));
+                    Administrador administrador = new Administrador(codigo, cedula, nombres, apellidos, usuario, contraseña, correo, rol, null);
+                    usuarios.add(administrador);
                 }
                 default -> System.err.println("Rol desconocido en línea: " + linea);
             }
         }
-    
         return usuarios;
     }
-
+/**
+ * El metodo procesa los espacios que se encuentran en cada linea de los Archivos
+ * @param lineas Ingresa el ArrayList con las lineas del archivo espacios.txt
+ * @return Devuelve el ArrayList de Espacios que se crean a partir del metodo
+ */
     public static ArrayList<Espacio> procesarEspacios(ArrayList<String> lineas) {
         ArrayList<Espacio> espacios = new ArrayList<>();
         for (String linea : lineas) {
@@ -147,7 +150,11 @@ public class ManejoArchivos {
         }
         return espacios;
     }
-
+/**
+ * El metodo procesa las reservas que se encuentran en cada linea de los Archivos
+ * @param lineas Ingresa el ArrayList con las lineas del archivo reservas.txt
+ * @return Devuelve el ArrayList de Reservas que se crean a partir del metodo
+ */
     public static ArrayList<Reserva> procesarReservas(ArrayList<String> lineas) {
     ArrayList<Reserva> reservas = new ArrayList<>();
     SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
@@ -169,6 +176,7 @@ public class ManejoArchivos {
     }
     return reservas;
 }
+
 
     
     

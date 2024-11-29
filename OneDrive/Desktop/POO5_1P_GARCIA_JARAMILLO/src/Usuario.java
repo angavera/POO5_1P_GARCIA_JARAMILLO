@@ -1,3 +1,4 @@
+package src;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -24,6 +25,11 @@ public abstract class Usuario {
 
     }
 
+    /**
+     * 
+     * @param fechaUsr Ingresa una fecha de tipo String 
+     * @return retorna una fecha formateada de tipo Date
+     */
     public static Date convertirFecha(String fechaUsr){
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
         formatter.setLenient(false);

@@ -1,3 +1,4 @@
+package src;
 import java.util.ArrayList;
 import  java.util.Scanner;
 
@@ -16,7 +17,11 @@ public class Administrador extends Usuario{
     public void setCargo(String cargo) {
         this.cargo = cargo;
     }
-
+/**
+ * El metodo muestra el menu Gestionar Reservas exclusivo de los administradores
+ * @param reservas Ingresa un ArrayList de las reservas
+ * @param usuarios Ingresa un ArrayList de usuarios
+ */
     public void gestionarReservas(ArrayList<Reserva> reservas, ArrayList<Usuario> usuarios){
         Scanner sc = new Scanner(System.in);
 
@@ -64,7 +69,11 @@ public class Administrador extends Usuario{
             System.out.println("Decisión no válida. Intente de nuevo.");
         }
     }
-
+/**
+ * El metodo muestra el menu de Administrador para consultar las reservas de otros usuarios
+ * @param reservas Ingresa un ArrayList de reservas
+ * @param usuarios Ingresa un ArrayList de usuarios
+ */
     public void consultarReservaAdmin(ArrayList<Reserva> reservas, ArrayList<Usuario> usuarios){
         System.out.println("\n=== Consultar Reservas ===");
         System.out.println("Número total de reservas creadas: " + Reserva.getCantReservas());
@@ -90,14 +99,18 @@ public class Administrador extends Usuario{
 
     @Override
     public void reservar(){
-        System.out.println("Los administradores no resalizan reservas");
+        System.out.println("Los administradores no realizan reservas");
     }
 
     @Override
     public void consultarReserva(){
         System.out.println("Consultar en el menu administrador");
     }
-
+/**
+ * El metodo muestra el Menu para profesores y las opciones de acciones que tiene para realizar
+ * @param reservas Ingresa un ArrayList de reservas
+ * @param usuarios Ingresa un ArrayList de usuarios
+ */
     public void mostrarMenu(ArrayList<Reserva> reservas, ArrayList<Usuario> usuarios){
         Scanner sc =new Scanner(System.in);
         int opcion;

@@ -1,3 +1,4 @@
+package src;
 
 public class Espacio{
     private String codigoUnico;
